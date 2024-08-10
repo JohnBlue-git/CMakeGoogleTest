@@ -7,11 +7,18 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+# Set variables
+set(SOURCE
+    my_test.cpp
+    ${PROJECT_SOURCE_DIR}/source/caculate.cpp
+)
+
 # Include GoogleTest headers
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
 # Add the test executable
-add_executable(my_test my_test.cpp)
+add_executable(my_test ${SOURCE})
 
 # Link GoogleTest and pthread
 target_link_libraries(my_test gtest gtest_main pthread)
