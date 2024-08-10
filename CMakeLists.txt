@@ -9,3 +9,7 @@ add_subdirectory(source)
 
 # Add the tests directory
 add_subdirectory(tests)
+
+# Define the install directory for binaries
+install(TARGETS my_app DESTINATION ${PROJECT_SOURCE_DIR}/bin)
+install(TARGETS my_test DESTINATION ${PROJECT_SOURCE_DIR}/bin)
