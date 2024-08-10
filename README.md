@@ -1,0 +1,1 @@
+# CMake_GoogleTest_Note
