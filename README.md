@@ -35,8 +35,14 @@ ctest
 This setup assumes you're using CMake version 3.14 or higher and that you have Google Test available online. Adjust the paths and versions according to your needs.
 
 
+若 found gtest
+Found GTest: /opt/conda/lib/cmake/GTest/GTestConfig.cmake (found version "1.11.0") 
+
+若fetch
 
 ??? 需要 sudo make install
+
+but because gtest have to be installed in /usr/..., we have to "sudo make install" to let get sufficient permission
 
 -- Installing: /usr/local/include/gtest/internal/custom/gtest.h
 -- Installing: /usr/local/include/gtest/internal/custom/gtest-printers.h
