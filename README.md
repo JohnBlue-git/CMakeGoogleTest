@@ -237,6 +237,16 @@ but don't need to defined whether it is static link or shared link
 
 
 
+也解釋一下
+<target>_include ...
+include ...
+...
+
+
+也解釋一下
+sub directory
+
+
 
 !!!
 
