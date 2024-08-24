@@ -1,4 +1,4 @@
-# CMake_GoogleTest_Note
+# CMake_GoogleTest
 
 Building the Project
 To build the project, follow these steps:
