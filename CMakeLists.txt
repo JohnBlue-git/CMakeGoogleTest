@@ -15,3 +15,4 @@ add_subdirectory(tests)
 
 # Define the install directory for binaries
 install(TARGETS my_app DESTINATION ${BIN})
+install(TARGETS my_test DESTINATION ${BIN})

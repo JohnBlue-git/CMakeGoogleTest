@@ -11,18 +11,26 @@ cd build
 
 # Run CMake to configure the project
 cmake ..
+# New in cmake version 3.24
+cmake .. --fresh
 
 # Build the project
 make
-sudo make install
 
-# Rub the app
-my_app
+# Install the project to bin
+sudo make install
 
 # Run the tests
 ctest
+
+# Run the app
+my_app
+
+# Check dependency
+ldd my_test
 ```
-Why need sudo ?
+
+Why need sudo make install ? \
 Because gtest have to be installed in /usr/..., we have to "sudo make install" to let get sufficient permission
 ```console
 -- Installing: /usr/local/include/gtest/internal/custom/gtest.h
@@ -31,10 +39,11 @@ Because gtest have to be installed in /usr/..., we have to "sudo make install" t
 -- Installing: /usr/local/include/gtest/gtest.h
 -- Installing: /usr/local/include/gtest/gtest_prod.h
 -- Installing: /usr/local/include/gtest/gtest-printers.h
--- Installing: /usr/local/lib/libgtest.a
--- Installing: /usr/local/lib/libgtest_main.a
+-- Installing: /usr/local/lib/libgtest.a        or   .so
+-- Installing: /usr/local/lib/libgtest_main.a   or   .so
 -- Installing: /usr/local/lib/pkgconfig/gtest.pc
 -- Installing: /usr/local/lib/pkgconfig/gtest_main.pc
+-- Installing: /usr/local/lib/cmake/GTest/GTestConfig.cmake
 ```
 
 ## How to install Google Test library
@@ -83,7 +92,7 @@ ls /usr/local/lib | grep gtest
 # Find google test
 find_package(GTest REQUIRED)
 
-# If not install, then fetch the source from the intertnet
+# Fetch and Build
 if (NOT GTest_FOUND)
     # Download and install GoogleTest
     include(FetchContent)
@@ -92,7 +101,22 @@ if (NOT GTest_FOUND)
         GIT_REPOSITORY https://github.com/google/googletest.git
         GIT_TAG        release-1.11.0
     )
+
+    # CMake does not define BUILD_SHARED_LIBS by default, but projects often create a cache entry for it using the option()
+    # Set BUILD_SHARED_LIBS on top level to bring it to the subdirectory
+    option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
+    # Re-set BUILD_SHARED_LIBS if neccessary
+    #set(BUILD_SHARED_LIBS OFF)
+    #message(STATUS "shared ${BUILD_SHARED_LIBS}")
+
+    # Method 1: Make available
     FetchContent_MakeAvailable(googletest)
+
+    # Method 2: Subdirectory
+    # Populate the content
+    #FetchContent_Populate(googletest)
+    # Add GoogleTest as a subdirectory
+    #add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
 endif()
 ```
 
