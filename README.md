@@ -50,6 +50,7 @@ cd /usr/src/googletest
 sudo cmake CMakeLists.txt
 sudo make
 sudo cp *.a /usr/lib
+# -DBUILD_SHARED_LIBS=ON parameter builds GoogleTest libraries as shared libraries. Otherwise, the libraries are built as static libraries.
 
 # Verify Installation: The libraries should now be installed in /usr/lib. You can verify that they are there:
 ls /usr/lib | grep gtest
@@ -71,6 +72,7 @@ cd build
 cmake ..
 make
 sudo make install
+# -DBUILD_SHARED_LIBS=ON parameter builds GoogleTest libraries as shared libraries. Otherwise, the libraries are built as static libraries.
 
 # Verify Installation: Check if Google Test libraries are in the system:
 ls /usr/local/lib | grep gtest
