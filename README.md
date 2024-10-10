@@ -216,9 +216,9 @@ if (<...>_INCLUDE_DIR AND <...>_LIBRARY)
 endif (<...>_INCLUDE_DIR AND <...>_LIBRARY)
 ```
 
-## Common feature / syntax in CMake
+## Common feature / syntax of CMake
 
-### Add sub directory (aub project)
+### Add sub directory (sub-project)
 ```console
 add_subdirectory(sub_directory)
 ```
