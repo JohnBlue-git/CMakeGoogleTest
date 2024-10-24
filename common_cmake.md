@@ -54,15 +54,15 @@ add_dependencies(lib2 lib1)
 ```
 
 ### Installation settings
-If want to install in default directoy, \
+Installation would be in default directoy, \
 the default prefix usually is is "/usr/local" \
 the executables and dlls would be placed in "/usr/local/bin" \
 and header files folder would be placed in "/usr/local/include" \
 \
-Also
-ARCHIVE: static libraries .a \
-LIBRARY: shared libraries .so \
-RUNTIME: executables and dlls
+and ... \
+**ARCHIVE**: static libraries .a \
+**LIBRARY**: shared libraries .so \
+**RUNTIME**: executables and dlls
 ```console
 install(TARGETS <program>
   ARCHIVE DESTINATION lib
