@@ -7,33 +7,33 @@ add_subdirectory(sub_directory)
 
 ### Include header
 ```console
-# for all
+# for all targets
 include_directories()
 
-# only target
+# only for target
 target_include_directories()
 ```
 
-### Add app or lib
+### Add executable or library
 ```console
-# app
+# exe
 add_executable(app app.cpp)
 
 # lib
 add_library(lib STATIC lib.cpp)
 ```
 
-### link or load
-C code will often link multiple libraryies to build application.
+### Link or Load library for a program 
+C / C++ code will often link multiple libraryies to build application.
 Static linkage is the basic level to link among libraries (.a file).
 Dynamic linkage is a way link shared library (.so file). (app can share library to save memory usage)
 Dynamic loaded is another way to only load the library if it's necessary (via using ldopen) \
 Ref: https://makori-mildred.medium.com/how-to-create-a-dynamic-library-in-c-and-how-to-use-it-30c304f399a4
 ```console
-# for all
+# for all targets
 link_library(...)
 
-# only target
+# only for target
 target_link_library(<target> ...)
 ```
 We don't need to defined whether it is static link or shared link.
@@ -51,4 +51,47 @@ add_library(lib2 STATIC lib2.cpp)
 
 # lib2 depend on lib1
 add_dependencies(lib2 lib1)
+```
+
+### Installation settings
+If want to install in default directoy, \
+the default prefix usually is is "/usr/local" \
+the executables and dlls would be placed in "/usr/local/bin" \
+and header files folder would be placed in "/usr/local/include" \
+\
+Also
+ARCHIVE: static libraries .a \
+LIBRARY: shared libraries .so \
+RUNTIME: executables and dlls
+```console
+install(TARGETS <program>
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin # For Windows DLLs
+)
+
+install(DIRECTORY include/ DESTINATION include)
+```
+We can also set customized install prefix
+```console
+set(CMAKE_INSTALL_PREFIX "/desired/install/path" CACHE PATH "Installation Directory" FORCE)
+install(...)
+```
+We can also set permission level for the installations
+```console
+install(TARGETS <program>
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+    PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+                GROUP_READ GROUP_EXECUTE
+                WORLD_READ WORLD_EXECUTE
+)
+
+install(FILES file.conf
+    DESTINATION ${doc}
+    PERMISSIONS OWNER_READ OWNER_WRITE
+                GROUP_READ
+                WORLD_READ
+)
 ```
