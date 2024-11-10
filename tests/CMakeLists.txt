@@ -57,4 +57,17 @@ add_executable(my_test ${SOURCE})
 target_link_libraries(my_test PRIVATE gtest gtest_main pthread)
 
 # Add a test
+
+# if only want to add single target
 add_test(NAME my_test COMMAND my_test)
+
+# if want to auto discovery test and add all of them
+# include(GoogleTest)
+# gtest_discover_tests(my_test)
+# why using include(GoogleTest) ?
+# It is highly recommended for convenience and simplicity.
+# The include(GoogleTest) line in your CMakeLists.txt script helps set up the necessary macros and functions to work seamlessly with Google Test.
+
+# alternative 
+# but not as auto as the gtest_discover_tests()
+# gtest_add_tests(TARGET my_test)
